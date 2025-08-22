@@ -57,11 +57,6 @@ jobs:
           ref: llvmorg-${{inputs.version}}
           fetch-depth: 1
 
-      - name: Install Node.js toolchain
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
       - name: Setup zig
         run: |
           curl -L "https://ziglang.org/download/${ZIG_VERSION}/zig-linux-$(uname -m)-${ZIG_VERSION}.tar.xz" | sudo tar JxC /usr/local
