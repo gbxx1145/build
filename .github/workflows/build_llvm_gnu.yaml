@@ -152,7 +152,9 @@ jobs:
             -DCMAKE_BUILD_TYPE=MinSizeRel \
             -DCMAKE_CROSSCOMPILING=True \
             -DCMAKE_C_COMPILER="${CC}" \
+            -DCMAKE_C_LINKER_DEPFILE_SUPPORTED=0 \
             -DCMAKE_CXX_COMPILER="${CXX}" \
+            -DCMAKE_CXX_LINKER_DEPFILE_SUPPORTED=0 \
             -DCMAKE_ASM_COMPILER="${CC}" \
             -DLLVM_ENABLE_PROJECTS="${{inputs.projects}}" \
             -DLLVM_ENABLE_ZLIB=FORCE_ON \
