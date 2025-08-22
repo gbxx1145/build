@@ -70,7 +70,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install ninja-build binfmt-support qemu-user-static
+          sudo apt install ninja-build binfmt-support qemu-user-static libc6:arm64
 
       - name: Build dependencies
         run: |
