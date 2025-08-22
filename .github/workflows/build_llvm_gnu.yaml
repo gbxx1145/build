@@ -61,7 +61,7 @@ jobs:
         with:
           version: 0.14.0
 
-      - name: Setup musl toolchain
+      - name: Setup gnu toolchain
         run: |
           cd ${{runner.temp}}
           git clone https://github.com/zongou/zig-as-llvm
