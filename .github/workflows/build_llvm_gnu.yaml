@@ -36,7 +36,7 @@ jobs:
       matrix:
         target:
           - aarch64-linux-gnu
-          - x86_64-linux-gnu
+          # - x86_64-linux-gnu
     env:
       ROOTDIR: ${{github.workspace}}
       TARGET_BUILD_DIR: ${{github.workspace}}/build/${{matrix.target}}
