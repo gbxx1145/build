@@ -58,7 +58,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install ninja-build binfmt-support qemu-user-static gcc-10-aarch64-linux-gnu
+          sudo apt install ninja-build binfmt-support qemu-user-static gcc-10-aarch64-linux-gnu g++-10-aarch64-linux-gnu
 
       - name: Build dependencies
         run: |
