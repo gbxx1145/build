@@ -73,7 +73,7 @@ jobs:
               mkdir -p "${TARGET_BUILD_DIR}"/zlib
               (
                   cd ${ROOTDIR}/zlib
-                  CC=${CC} CXX=${CXX} ./configure --prefix="${TARGET_INSTALL_DIR}" --static
+                  CFLAGS="" CXXFLAGS="" CC=${CC} CXX=${CXX} ./configure --prefix="${TARGET_INSTALL_DIR}" --static
                   make -j"$(nproc --all)" install
               )
           fi
