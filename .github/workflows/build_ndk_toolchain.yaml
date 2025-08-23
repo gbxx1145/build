@@ -15,7 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
-      # aosp dir occupies 40G
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
 
@@ -36,12 +35,6 @@ jobs:
           echo Start syncing
           repo sync
 
-      - name: Python environment setup
-        run: |
-          sudo apt install python3-poetry
-          cd aosp/ndk
-          poetry install
-
       - name: Fetch build scripts
         run: |
           cd ${BUILD_SCRIPTS}
@@ -54,6 +47,11 @@ jobs:
           rm -rf *
           cp -rf ${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
           mv ../patchss patches #restore patches
+
+      - name: Python environment setup
+        run: |
+          sudo apt install python3-poetry
+          poetry install
 
       - uses: zongou/run-vscode-server@0.0.3
         name: Run VS Code server to expore
