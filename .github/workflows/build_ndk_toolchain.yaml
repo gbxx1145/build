@@ -48,7 +48,7 @@ jobs:
           mv patches ../patches #backup patches.
           rm -rf *
           cp -rf $CURRENRT/${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
-          mv ../patchss patches #restore patches
+          mv ../patches patches #restore patches
 
       - name: Python environment setup
         run: |
