@@ -37,6 +37,7 @@ jobs:
 
       - name: Fetch build scripts
         run: |
+          mkdir -p ${BUILD_SCRIPTS}
           cd ${BUILD_SCRIPTS}
           git clone https://github.com/SnowNF/ndk-aarch64-linux
 
