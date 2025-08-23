@@ -43,15 +43,17 @@ jobs:
 
       - name: Replace build scripts
         run: |
+          export CURRENRT=$(pwd)
           cd ${LLVM_TOOLCHAIN}/toolchain/llvm_android
           mv patches ../patches #backup patches.
           rm -rf *
-          cp -rf ${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
+          cp -rf $CURRENRT/${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
           mv ../patchss patches #restore patches
 
       - name: Python environment setup
         run: |
           sudo apt install python3-poetry
+          cd ${LLVM_TOOLCHAIN}/toolchain/llvm_android
           poetry install
 
       - uses: zongou/run-vscode-server@0.0.3
