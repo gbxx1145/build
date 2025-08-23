@@ -1,0 +1,60 @@
+# https://android.googlesource.com/platform/ndk/+/refs/heads/main/docs/Building.md
+name: Build NDK Toolchain
+on:
+  workflow_dispatch:
+
+env:
+  LLVM_TOOLCHAIN: llvm-toolchain
+  BUILD_SCRIPTS: build-scripts
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      # aosp dir occupies 40G
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+
+      - name: Prerequisites
+        run: |
+          sudo apt install qemu-user-static
+
+          curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
+          chmod +x /usr/local/bin/repo
+
+          mkdir -p ${LLVM_TOOLCHAIN}
+          cd ${LLVM_TOOLCHAIN}
+
+          # git config --global user.email "test@example.com"
+          # git config --global user.name "test"
+          repo init -u https://android.googlesource.com/platform/manifest -b llvm-toolchain
+
+          echo Start syncing
+          repo sync
+
+      - name: Python environment setup
+        run: |
+          sudo apt install python3-poetry
+          cd aosp/ndk
+          poetry install
+
+      - name: Fetch build scripts
+        run: |
+          cd ${BUILD_SCRIPTS}
+          git clone https://github.com/SnowNF/ndk-aarch64-linux
+
+      - name: Replace build scripts
+        run: |
+          cd ${LLVM_TOOLCHAIN}/toolchain/llvm_android
+          mv patches ../patches #backup patches.
+          rm -rf *
+          cp -rf ${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
+          mv ../patchss patches #restore patches
+
+      - uses: zongou/run-vscode-server@0.0.3
+        name: Run VS Code server to expore
+
