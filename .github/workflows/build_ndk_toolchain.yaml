@@ -50,12 +50,6 @@ jobs:
           cp -rf $CURRENRT/${BUILD_SCRIPTS}/ndk-aarch64-linux/* . #replace this repository's code
           mv ../patches patches #restore patches
 
-      - name: Python environment setup
-        run: |
-          sudo apt install python3-poetry
-          cd ${LLVM_TOOLCHAIN}/toolchain/llvm_android
-          poetry install
-
       - uses: zongou/run-vscode-server@0.0.3
         name: Run VS Code server to expore
 
