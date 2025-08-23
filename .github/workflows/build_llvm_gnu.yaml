@@ -62,6 +62,15 @@ jobs:
 
       - name: Build dependencies
         run: |
+          export CC=${CC}
+          export CXX=${CXX}
+          export LD=${LD}
+          export OBJCOPY=${OBJCOPY}
+          export AR=${AR}
+          export STRIP=${STRIP}
+          export CFLAGS=""
+          export CXXFLAGS=""
+
           rm -rf build output/ zlib/ zstd/
 
           if ! test -f "${TARGET_INSTALL_DIR}"/lib/libz.a; then
@@ -73,7 +82,7 @@ jobs:
               mkdir -p "${TARGET_BUILD_DIR}"/zlib
               (
                   cd ${ROOTDIR}/zlib
-                  CFLAGS="" CXXFLAGS="" CC=${CC} CXX=${CXX} ./configure --prefix="${TARGET_INSTALL_DIR}" --static
+                  ./configure --prefix="${TARGET_INSTALL_DIR}" --static
                   make -j"$(nproc --all)" install
               )
           fi
