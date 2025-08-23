@@ -31,7 +31,7 @@ jobs:
 
           # git config --global user.email "test@example.com"
           # git config --global user.name "test"
-          repo init -u https://android.googlesource.com/platform/manifest -b llvm-toolchain
+          repo init -u https://android.googlesource.com/platform/manifest -b llvm-toolchain --partial-clone --depth=1
 
           echo Start syncing
           repo sync
